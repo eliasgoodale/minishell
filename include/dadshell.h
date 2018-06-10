@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 14:20:35 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 15:08:01 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,21 @@ typedef struct s_master_shell_process
 	t_process *p;
 }
 
+typedef struct s_process
+{
+	struct process *next;       /* next process in pipeline */
+	char **argv;                /* for exec */
+ 	pid_t pid;                  /* process ID */
+	char completed;             /* true if process has completed */
+	char stopped;               /* true if process has stopped */
+	int status;
+}
+
 typedef struct s_job
 {
 	struct s_job *next;         							//right now will be the filename of the tty device you wish to read from
     char *command;
+	t_process *first_process;
     pid_t pgid;
     char notified;
     struct termios tmodes;
