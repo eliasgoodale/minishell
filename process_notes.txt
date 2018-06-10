@@ -1,0 +1,12 @@
+Processes:
+			> exist independently 
+            > an instance of a computer program that is being executed
+            > contains: program code, and current activity
+            > a process can be made up of multiple threads of execution
+			> processes interact through IPC mechanisms of the OS
+
+Threads: 
+			> smallest sequence of programmed instructionions that can be managed indepedently by a scheduler
+			> typically exist as subsets of a process
+			> threads of a process share memory in an address space 
+			> 
