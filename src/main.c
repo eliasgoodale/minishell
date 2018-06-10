@@ -6,13 +6,13 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:17:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 12:59:54 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:01:21 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-void dad_loop(int fd)
+void dad_loop(t_process *p, int fd)
 {
 	char *line;
 	char **args;

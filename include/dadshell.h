@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 13:56:36 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:01:16 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,6 @@ char **ENV;
 
 typedef enum process_{COMPLETED, STOPPED, STATUS}
 
-typedef struct		s_process
-{
-	bool shell_is_interactive;
-	bool completed;
-	bool stopped;
-    struct s_process *next;
-    char **args
-    pid_t pid;
-}					t_process;
-
-typedef struct s_job
-{
-    struct s_job *next;
-    char *command;
-    t_process *first_process;
-    pid_t pgid;
-    char notified;
-    struct termios tmodes;
-    int stdin; 
-	int stdout;
-	int	stderr;
-}               t_job;
 
 
 void 	dad_loop(int fd);
