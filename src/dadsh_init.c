@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 19:17:38 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 13:00:00 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 15:07:41 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void init_shell(int fd, char **env)
 	pid_t shell_pgid;
 	int shell_terminal = fd;
 	int shell_is_interactive = isatty(shell_terminal);
-	create_env_table(env);
-	ft_printf("%s\n", ENV[0]);
-	sleep(9999);
+
 	if (shell_is_interactive)
 	{
 		//while (tcgetpgrp(shell_terminal) != (shell_pgid = getpgrp()))

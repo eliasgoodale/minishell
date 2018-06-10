@@ -1,43 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dad_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/09 11:17:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:07:40 by egoodale         ###   ########.fr       */
+/*   Created: 2018/06/10 14:24:27 by egoodale          #+#    #+#             */
+/*   Updated: 2018/06/10 15:07:38 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-void dad_loop(t_process *p, int fd)
+t_job	*find_job(pid_t target_pgid, t_job **first_job)
 {
-	char *line;
-	char **args;
-	int status;
+	t_job *j;
 
-	status = 1;
-	while (status)
-	{
-		ft_printf("\n> ");
-		get_next_line(fd, &line);
-		args = ft_strsplit(line, ' ');
-		status = dadsh_exec(args);
-		free(line);
-		free(args);
-	}
-		
+	j = *first_job;
+	while(j && (j->pgid != target_pgid))
+		j = j->next;
+	return (j);
 }
 
-
-
-int main(int ac, char **av, char **env)
+int		job_is_stopped(t_job *j)
 {
-	char *ttyfile = av[1];
-	int fd = open(ttyfile, O_RDWR);
-	init_shell(fd, env);
-	dad_loop(fd);
-	return (EXIT_SUCCESS);
+	t_process *p;
+
+	p = j->first_process;
+	while(p)
+	{
+		if(!p->completed && !p->stopped)
+			return (0);
+		p = p->next;
+	}
+}
+
+int		job_is_completed(job *j)
+{
+	t_process *p;
+
+	p = j->first_process;
+	while(p)
+	{
+		if(!p->completed)
+			return (0);
+	}
+	return (1);
 }

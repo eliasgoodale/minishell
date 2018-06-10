@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 14:01:16 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:20:35 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,27 @@ char **ENV;
 
 typedef enum process_{COMPLETED, STOPPED, STATUS}
 
+typedef struct s_master_shell_process
+{
+	pid_t pgid;
+	int shell_is_interactive;
+	int shell_terminal;
+	int foreground;
+	t_process *p;
+}
+
+typedef struct s_job
+{
+	struct s_job *next;         							//right now will be the filename of the tty device you wish to read from
+    char *command;
+    pid_t pgid;
+    char notified;
+    struct termios tmodes;
+    int stdin; 
+	int stdout;
+	int	stderr;
+	bool
+}               t_job;
 
 
 void 	dad_loop(int fd);
