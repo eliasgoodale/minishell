@@ -9,4 +9,4 @@ Threads:
 			> smallest sequence of programmed instructionions that can be managed indepedently by a scheduler
 			> typically exist as subsets of a process
 			> threads of a process share memory in an address space 
-			> 
+			>fafdaf 
