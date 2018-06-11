@@ -6,11 +6,21 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:17:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 18:35:58 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/11 12:46:22 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
+
+int		env_len(char **envv)
+{
+	int len;
+
+	len = -1;
+	while(env[++len])
+		;
+	return (len);
+}
 
 void	ft_freestrarr(char **arr)
 {
@@ -48,7 +58,7 @@ int main(int ac, char **av, char **env)
 {
 	char *ttyfile = av[1];
 	int fd = open(ttyfile, O_RDWR);
-	//init_shell(fd, env);
+	init_shell(fd, env);
 	dad_loop(fd);
 	return (EXIT_SUCCESS);
 }

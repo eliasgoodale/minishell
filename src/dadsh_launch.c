@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:03:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 19:25:01 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/11 12:52:20 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int dadsh_run(char *path, char **args)
 	pid_t	pid;
 	
 	pid = fork();
-	signal(SIGINT, proc_signal_handler);
+	signal(SIGINT, dad_psignal);
 	if (pid == 0)
 		execve(path, args, g_envv);
 	else if (pid < 0)

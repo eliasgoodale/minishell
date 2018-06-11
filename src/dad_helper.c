@@ -6,11 +6,32 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 16:42:56 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 20:29:07 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/11 13:22:46 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
+
+int		arr_len(char **envv)
+{
+	int len;
+
+	len = -1;
+	while(env[++len])
+		;
+	return (len);
+}
+
+void	ft_freestrarr(char **arr)
+{
+	VAR(int, i, -1);
+	while(arr[++i])
+	{	
+		free(arr[i]);
+		arr[i] = NULL;
+	}
+	free(arr);
+}
 
 void			print_env(void)
 {
@@ -21,7 +42,7 @@ void			print_env(void)
 		ft_printf("%s\n", g_envv[i]);
 }
 
-int				env_len(char **envv)
+int				arr_len(char **envv)
 {
 	VAR(int, i, -1);
 	while(envv[i])
@@ -32,7 +53,7 @@ int				env_len(char **envv)
 void	init_envv(char **env)
 {
 	VAR(int, i, -1);
-	if(!(g_envv = (char **)malloc(sizeof(char *) * (env_len(env) + 1))))
+	if(!(g_envv = (char **)malloc(sizeof(char *) * (arr_len(env) + 1))))
 		throw_err("ENV MALL_ERR");
 	while (env[++i])
 		if(!(g_envv[i] = ft_strdup(envv[i])))

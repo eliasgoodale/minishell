@@ -6,30 +6,15 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 19:17:38 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:07:41 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/11 12:46:24 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-int		env_len(char **env)
-{
-	int len;
 
-	len = -1;
-	while(env[++len])
-		;
-	return (len);
-}
 
-void	create_env_table(char **env)
-{
-	if(!(ENV = (char **)malloc(sizeof(char *) * (env_len(env) + STD_ENV + 1))))
-		throw_err("ENV MALL_ERR");
-	ENV[0] = ft_strdup("PATH_LS=~/bin/ft_ls");
-}
-
-void init_shell(int fd, char **env)
+/*void init_shell(int fd, char **env)
 {
 	struct termios shell_tmodes;
 	pid_t shell_pgid;
@@ -56,4 +41,4 @@ void init_shell(int fd, char **env)
 		tcgetattr(shell_terminal, &shell_tmodes);
 		
 	}
-}
+}*/
