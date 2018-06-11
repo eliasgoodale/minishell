@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 20:07:26 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 20:29:06 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,18 @@ static int		check_bins(char **command)
 	char *token;
 	char *path;
 	struct stat fstat;
+	int len;
 
 	path = get_envv("PATH");
 	while(token = ft_strtok(path, ": "))
 	{
-		if(lstat(token, &fstat))
+		len = ft_strlen(token);
+		if(ft_strncmp(command[0], token, len) == 0)
+			return(dadsh_run(command[0], command));
+		else
+		{
+			chec
+		}
 		
 	}
 }
