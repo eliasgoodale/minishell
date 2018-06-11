@@ -5,45 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/10 14:24:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:07:38 by egoodale         ###   ########.fr       */
+/*   Created: 2018/06/10 16:42:56 by egoodale          #+#    #+#             */
+/*   Updated: 2018/06/10 17:44:38 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-t_job	*find_job(pid_t target_pgid, t_job **first_job)
+void			print_env(void)
 {
-	t_job *j;
+	int		i;
 
-	j = *first_job;
-	while(j && (j->pgid != target_pgid))
-		j = j->next;
-	return (j);
+	i = -1;
+	while (g_envv[++i])
+		ft_printf("%s\n", g_envv[i]);
 }
 
-int		job_is_stopped(t_job *j)
+int				env_len(char **envv)
 {
-	t_process *p;
-
-	p = j->first_process;
-	while(p)
-	{
-		if(!p->completed && !p->stopped)
-			return (0);
-		p = p->next;
-	}
+	VAR(int, i, -1);
+	while(envv[i])
+		i++;
+	return (i + STD_ENV);
 }
 
-int		job_is_completed(job *j)
+void	init_envv(char **env)
 {
-	t_process *p;
+	VAR(int, i, -1);
+	if(!(g_envv = (char **)malloc(sizeof(char *) * (env_len(env) + 1))))
+		throw_err("ENV MALL_ERR");
+	while (env[++i])
+		if(!(g_envv[i] = ft_strdup(envv[i])))
+			throw_err("ENV MALL_ERR");
+}
 
-	p = j->first_process;
-	while(p)
+int		find_envv(char *var)
+{
+	VAR(int, i, -1);
+	VAR(char *, tmp, NULL);
+	while(g_envv[++i])
 	{
-		if(!p->completed)
-			return (0);
+		
 	}
-	return (1);
 }

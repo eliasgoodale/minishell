@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:08:01 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:45:05 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,52 +25,6 @@
 #define MAX_BUILTINS 3
 #define STD_ENV 1
 
-typedef struct	s_alias
-{
-	char *alias;
-	char *command;
-}				t_alias;
-
-t_alias 	g_alias_tab[] = {
-	{"ls" : "~/bin/ft_ls"}
-}
-
-char **ENV;
-
-typedef enum process_{COMPLETED, STOPPED, STATUS}
-
-typedef struct s_master_shell_process
-{
-	pid_t pgid;
-	int shell_is_interactive;
-	int shell_terminal;
-	int foreground;
-	t_process *p;
-}
-
-typedef struct s_process
-{
-	struct process *next;       /* next process in pipeline */
-	char **argv;                /* for exec */
- 	pid_t pid;                  /* process ID */
-	char completed;             /* true if process has completed */
-	char stopped;               /* true if process has stopped */
-	int status;
-}
-
-typedef struct s_job
-{
-	struct s_job *next;         							//right now will be the filename of the tty device you wish to read from
-    char *command;
-	t_process *first_process;
-    pid_t pgid;
-    char notified;
-    struct termios tmodes;
-    int stdin; 
-	int stdout;
-	int	stderr;
-	bool
-}               t_job;
 
 
 void 	dad_loop(int fd);
@@ -78,9 +32,22 @@ void	throw_err(char *msg);
 int		dadsh_launch(char **args);
 int		dadsh_exec(char **args);
 void	put_help_msg(void);
+void	init_shell(int fd, char **env);
+
+/*
+** Helper
+*/
+void	echo_out(char **args, int pos);
+
+/* 
+** Built-Ins
+*/
 int		dadsh_cd(char **args);
+int		dadsh_echo(char **args);
+int		dadsh_env(char **args);
+int		dadsh_setenv(char **args);
+int		dadsh_unsetenv(char **args);
 int		dadsh_help(char **args);
 int		dadsh_exit(char **args);
-void	init_shell(int fd, char **env);
 
 #endif 
