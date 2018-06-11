@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:36:09 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:43:03 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
 
 int		dadsh_exec(char **args)
 {
-	int i;
-
-	i = 0;
+	VAR(int, i, -1);
 	if(args[0] == NULL)
 		return (1);
-	while(i < MAX_BUILTINS)
-	{
+	while(++i < MAX_BUILTINS)
 		if (ft_strcmp(args[0], builtin_str[i]) == 0)
 			return(g_dadsh_cmds[i](args));
-		i++;
-	}
 	return (dadsh_launch(args));
 }
 

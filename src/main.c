@@ -6,13 +6,24 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:17:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 15:14:30 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:35:58 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-void dad_loop(int fd)
+void	ft_freestrarr(char **arr)
+{
+	VAR(int, i, -1);
+	while(arr[++i])
+	{	
+		free(arr[i]);
+		arr[i] = NULL;
+	}
+	free(arr);
+}
+
+void dad_loop(int ttyfd)
 {
 	char *line;
 	char **args;
@@ -22,13 +33,15 @@ void dad_loop(int fd)
 	while (status)
 	{
 		ft_printf("\n> ");
-		get_next_line(fd, &line);
+		signal(SIGINT, dad_signal);
+		get_next_line(ttyfd, &line);
 		args = ft_strsplit(line, ' ');
-		status = dadsh_exec(args);
 		free(line);
-		free(args);
+		status = dadsh_exec(args);
+		ft_freestrarr(args);
 	}
-		
+	ft_freestrarr(g_envv);
+	return (0);
 }
 
 int main(int ac, char **av, char **env)

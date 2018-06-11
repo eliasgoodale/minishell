@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 16:42:56 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 17:44:38 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:07:43 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,22 @@ void	init_envv(char **env)
 			throw_err("ENV MALL_ERR");
 }
 
-int		find_envv(char *var)
+int		get_envv(char *var)
 {
 	VAR(int, i, -1);
-	VAR(char *, tmp, NULL);
+	VAR(int, var_len, ft_strlen(var));
 	while(g_envv[++i])
-	{
-		
-	}
+		if(ft_strncmp(g_envv[i], var, var_len) == 0)
+			return(ft_strchr(g_envv[i], '=') + 1);
+	return (NULL);
+}
+
+int 	find_envv(char *var)
+{
+	VAR(int, i, -1);
+	VAR(int, var_len, ft_strlen(var));
+	while(g_envv[++i])
+		if(ft_strncmp(g_envv[i], var, var_len) == 0)
+			return(i);
+	return (NULL);
 }

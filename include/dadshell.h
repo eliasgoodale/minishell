@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 16:45:05 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 17:59:12 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define MAX_BUILTINS 3
 #define STD_ENV 1
 
+char **g_envv;
 
 
 void 	dad_loop(int fd);
