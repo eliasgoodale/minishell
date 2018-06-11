@@ -6,12 +6,26 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 18:43:03 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 20:07:26 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 #include "../include/cmd_tbl.h"
+
+static int		check_bins(char **command)
+{
+	char *token;
+	char *path;
+	struct stat fstat;
+
+	path = get_envv("PATH");
+	while(token = ft_strtok(path, ": "))
+	{
+		if(lstat(token, &fstat))
+		
+	}
+}
 
 int		dadsh_exec(char **args)
 {

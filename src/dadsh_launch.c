@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:03:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 12:59:51 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/10 19:25:01 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,46 @@ void	throw_err(char *msg)
 	exit(EXIT_FAILURE);
 }
 
+static int dadsh_run(char *path, char **args)
+{
+	pid_t	pid;
+	
+	pid = fork();
+	signal(SIGINT, proc_signal_handler);
+	if (pid == 0)
+		execve(path, args, g_envv);
+	else if (pid < 0)
+	{
+		free(path);
+		throw_err("Fork failed to create a new process.");
+		return (-1);
+	}
+	wait(&pid);
+	if (path)
+		free(path);
+	return (1);
+}
+
+int		dadsh_launch(char **args)
+{
+	struct stat	fstat;
+	
+	if(lstat(args[0], &fstat) != -1)
+	{
+		if(S_ISDIR(fstat.st_mode))
+		{
+			dadsh_cd(args);
+			return (0);
+		}
+		else if(fstat.st_mode & S_IXUSR)
+			return(dadsh_run(ft_strndup(args[0]), args))
+	}
+}
+
+
+
+
+/*
 int		dadsh_launch(char **args)
 {
 	pid_t pid;
@@ -38,4 +78,4 @@ int		dadsh_launch(char **args)
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
 	return (1);
-}
+}*/
