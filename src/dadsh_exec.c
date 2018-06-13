@@ -13,24 +13,51 @@
 #include "../include/dadshell.h"
 #include "../include/cmd_tbl.h"
 
-static int		check_bins(char **command)
+int		is_in_bins(char *command)
 {
-	char *token;
-	char *path;
-	struct stat fstat;
-	int len;
+    VAR(DIR*, bin_folder, opendir("/usr/bin/"));
+    VAR(t_dirent *, entry, NULL);
+    while ((entry = readdir(bin_folder)))
+        if (ft_strcmp(entry->d_name, command) == 0)
+            return (1);
+    return (0);
+}
 
-	path = get_envv("PATH");
-	while(token = ft_strtok(path, ": "))
+static int dadsh_run(char *path, char **args)
+{
+	pid_t	pid;
+	char	*bin_path;
+    if (is_in_bins(path))
+        path = ft_strcat("/usr/bin/", path);
+	pid = fork();
+	signal(SIGINT, dad_psignal);
+	if (pid == 0)
+		execve(path, args, g_envv);
+	else if (pid < 0)
 	{
-		len = ft_strlen(token);
-		if(ft_strncmp(command[0], token, len) == 0)
-			return(dadsh_run(command[0], command));
-		else
+		free(path);
+		throw_err("Fork failed to create a new process.");
+		return (-1);
+	}
+	wait(&pid);
+	if (path)
+		free(path);
+	return (1);
+}
+
+int		dadsh_launch(char **args)
+{
+	struct stat	fstat;
+
+	if(lstat(args[0], &fstat) != -1)
+	{
+		if(S_ISDIR(fstat.st_mode))
 		{
-			chec
+			dadsh_cd(args);
+			return (0);
 		}
-		
+		else if(fstat.st_mode & S_IXUSR)
+			return(dadsh_run(ft_strdup(args[0]), args));
 	}
 }
 

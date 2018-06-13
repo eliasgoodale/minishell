@@ -12,20 +12,20 @@
 
 #include "../include/dadshell.h"
 
-void	echo_out(char *str)
+void	echo_out(char *s)
 {
 	VAR(char *, endquo, NULL);
-	VAR(char, quo, *str);
-	if(quo == '\"' || '\'')
+	VAR(char, quo, *s);
+	if(quo == '\"' || quo == '\'')
 	{
-		endquo = ft_strrchr((str + 1), quo);
+		endquo = ft_strrchr((s + 1), quo);
 		if (endquo && !*(endquo + 1))
-			write(1, (str + 1), endquo - (str + 1));
+			write(1, (s + 1), endquo - (s + 1));
 		else   // can put in hang function for input here
-			write(1, str, ft_strlen(str));
+			write(1, s, ft_strlen(s));
 	}
 	else
-		ft_printf("%s", str);
+		ft_printf("%s", s);
 }
 
 int		dadsh_echo(char **args)
@@ -39,13 +39,13 @@ int		dadsh_echo(char **args)
 	}
 	if(ft_strcmp("-n", args[0]) == 0)
 	{
-		n_flags = 1;
+		n_flag = 1;
 		++i;
 	}
 	while(args[++i])
 	{
 		echo_out(args[i]);
-		if(!args[i + 1] && !n_flags)
+		if(!args[i + 1] && !n_flag)
 			ft_putchar('\n');
 	}
 	return(1);

@@ -6,12 +6,27 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 16:40:11 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/11 14:55:15 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/11 14:56:05 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
+char	**realloc_envv(int new_size)
+{
+	char	**new;
+	int		i;
+
+	new = (char **)ft_memalloc(sizeof(char *) * (new_size + 1));
+	i = -1;
+	while (g_envv[++i] && i < new_size)
+	{
+		new[i] = ft_strdup(g_envv[i]);
+		free(g_envv[i]);
+	}
+	free(g_envv);
+	return (new);
+}
 
 void	set_envv(char *key, char *val)
 {
@@ -27,7 +42,7 @@ void	set_envv(char *key, char *val)
 	}
 	else
 	{
-		g_envv = realloc_envvv(pos + 1);
+		g_envv = realloc_envv(pos + 1);
 		if (val)
 			g_envv[pos] = ft_strjoin(key, tmp);
 		else

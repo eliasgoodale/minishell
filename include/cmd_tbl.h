@@ -12,7 +12,7 @@
 
 #ifndef CMD_TBL_H
 #define CMD_TBL_H
-#define MAX_BUILTINS 3
+#define MAX_BUILTINS 7
 
 char *builtin_str[MAX_BUILTINS] = {
 	"cd",
@@ -21,7 +21,6 @@ char *builtin_str[MAX_BUILTINS] = {
 	"setenv",
 	"unsetenv",
 	"help",
-	"exit"
 };
 
 typedef int (*t_builtin)(char**);
@@ -32,9 +31,7 @@ t_builtin g_dadsh_cmds[MAX_BUILTINS] = {
 	&dadsh_env,
 	&dadsh_setenv,
 	&dadsh_unsetenv,
-	&dadsh_help,
-	&dadsh_exit
-
+	&dadsh_help
 };
 
 #endif

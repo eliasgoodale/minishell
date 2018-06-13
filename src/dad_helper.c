@@ -17,7 +17,7 @@ int		arr_len(char **envv)
 	int len;
 
 	len = -1;
-	while(env[++len])
+	while(envv[++len])
 		;
 	return (len);
 }
@@ -50,15 +50,6 @@ int				arr_len(char **envv)
 	return (i + STD_ENV);
 }
 
-void	init_envv(char **env)
-{
-	VAR(int, i, -1);
-	if(!(g_envv = (char **)malloc(sizeof(char *) * (arr_len(env) + 1))))
-		throw_err("ENV MALL_ERR");
-	while (env[++i])
-		if(!(g_envv[i] = ft_strdup(envv[i])))
-			throw_err("ENV MALL_ERR");
-}
 
 char		*get_envv(char *var)
 {
@@ -79,3 +70,4 @@ int 	find_envv(char *var)
 			return(i);
 	return (NULL);
 }
+

@@ -12,25 +12,21 @@
 
 #include "../include/dadshell.h"
 
-int		env_len(char **envv)
+void	throw_err(char *msg)
 {
-	int len;
-
-	len = -1;
-	while(env[++len])
-		;
-	return (len);
+	write(1, msg, ft_strlen(msg));
+	exit(EXIT_FAILURE);
 }
 
-void	ft_freestrarr(char **arr)
+void	init_envv(char **envv)
 {
-	VAR(int, i, -1);
-	while(arr[++i])
-	{	
-		free(arr[i]);
-		arr[i] = NULL;
-	}
-	free(arr);
+	VAR(int, i, STD_ENV - 1);
+	if(!(g_envv = (char **)malloc(sizeof(char *) * (arr_len(envv) + STD_ENV + 1))))
+		throw_err("ENV MALL_ERR");
+	envv[0] = "PATH=/usr/bin/:";
+	while (envv[++i])
+		if(!(g_envv[i] = ft_strdup(g_envv[i])))
+			throw_err("ENV MALL_ERR");
 }
 
 void dad_loop(int ttyfd)
@@ -51,14 +47,13 @@ void dad_loop(int ttyfd)
 		ft_freestrarr(args);
 	}
 	ft_freestrarr(g_envv);
-	return (0);
 }
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **envv)
 {
-	char *ttyfile = av[1];
+	char *ttyfile = "/dev/ttys001";
 	int fd = open(ttyfile, O_RDWR);
-	init_shell(fd, env);
+	init_envv(envv);
 	dad_loop(fd);
 	return (EXIT_SUCCESS);
 }

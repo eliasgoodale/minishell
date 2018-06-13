@@ -38,7 +38,7 @@ void	remove_envv(int var_pos)
 		var_count++;
 		i = var_count - 1;
 	}
-	g_envv = realloc_envv(var_count - 1);
+	g_envv = realloc_env(var_count - 1);
 }
 
 int		dad_unsetenv(char **args)

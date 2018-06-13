@@ -22,17 +22,19 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <sys/stat.h>
+#include <dirent.h>
 #define MAX_BUILTINS 3
 #define STD_ENV 1
 
 char **g_envv;
 
+typedef struct dirent	t_dirent;
 
 void 	dad_loop(int fd);
 int		dadsh_launch(char **args);
 int		dadsh_exec(char **args);
 void	put_help_msg(void);
-
 
 /*
 ** Process Execution
@@ -43,24 +45,25 @@ int		dadsh_exec(char **args);
 ** Helper
 */
 void	ft_freestrarr(char **arr);
-int		arr_len(char **envv);
+int		arr_len(char **arr);
 void	print_env(void);
 void	init_envv(char **env);
 char	*get_envv(char *var);
 int		find_envv(char *var);
 void	throw_err(char *msg);
-
+char    **realloc_envv(int new_size);
 /*
 ** Signal Handling
 */
 void	dad_signal(int sig);
 void	dad_psignal(int sig);
+
 /* 
 ** Built-Ins
 */
 int		dadsh_cd(char **args);
 int		dadsh_echo(char **args);
-void	echo_out(char **args, int pos);
+void	echo_out(char *s);
 int		dadsh_env(char **args);
 int		dadsh_setenv(char **args);
 int		dadsh_unsetenv(char **args);

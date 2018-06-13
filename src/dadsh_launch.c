@@ -12,47 +12,8 @@
 
 #include "../include/dadshell.h"
 
-void	throw_err(char *msg)
-{
-	write(1, msg, ft_strlen(msg));
-	exit(EXIT_FAILURE);
-}
 
-static int dadsh_run(char *path, char **args)
-{
-	pid_t	pid;
-	
-	pid = fork();
-	signal(SIGINT, dad_psignal);
-	if (pid == 0)
-		execve(path, args, g_envv);
-	else if (pid < 0)
-	{
-		free(path);
-		throw_err("Fork failed to create a new process.");
-		return (-1);
-	}
-	wait(&pid);
-	if (path)
-		free(path);
-	return (1);
-}
 
-int		dadsh_launch(char **args)
-{
-	struct stat	fstat;
-	
-	if(lstat(args[0], &fstat) != -1)
-	{
-		if(S_ISDIR(fstat.st_mode))
-		{
-			dadsh_cd(args);
-			return (0);
-		}
-		else if(fstat.st_mode & S_IXUSR)
-			return(dadsh_run(ft_strndup(args[0]), args))
-	}
-}
 
 
 

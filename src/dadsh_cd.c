@@ -19,17 +19,7 @@ int 	dadsh_cd(char **args)
 	else
 	{
 		if (chdir(args[1]))
-			throw_err("dadsh");
+			throw_err("dadsh_cd");
 	}
 	return (1);
-}
-
-int		dadsh_env(char **args)
-{
-
-}
-
-int		dadsh_setenv(char **args)
-{
-
 }
