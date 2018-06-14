@@ -12,16 +12,6 @@
 
 #include "../include/dadshell.h"
 
-int		arr_len(char **envv)
-{
-	int len;
-
-	len = -1;
-	while(envv[++len])
-		;
-	return (len);
-}
-
 void	ft_freestrarr(char **arr)
 {
 	VAR(int, i, -1);
@@ -50,7 +40,6 @@ int				arr_len(char **envv)
 	return (i + STD_ENV);
 }
 
-
 char		*get_envv(char *var)
 {
 	VAR(int, i, -1);
@@ -68,6 +57,6 @@ int 	find_envv(char *var)
 	while(g_envv[++i])
 		if(ft_strncmp(g_envv[i], var, var_len) == 0)
 			return(i);
-	return (NULL);
+	return (-1);
 }
 

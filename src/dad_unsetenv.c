@@ -12,10 +12,10 @@
 
 #include "../include/dadshell.h"
 
-char	**realloc_env(int new_size)
+char	**realloc_envv(int new_size)
 {
 	VAR(int, i, -1);
-	VAR(char**, new, ft_memalloc(sizeof(char *) * (new_size + 1)))
+	VAR(char**, new, ft_memalloc(sizeof(char *) * (new_size + 1)));
 	while (g_envv[++i] && i < new_size)
 	{
 		new[i] = ft_strdup(g_envv[i]);
@@ -38,10 +38,10 @@ void	remove_envv(int var_pos)
 		var_count++;
 		i = var_count - 1;
 	}
-	g_envv = realloc_env(var_count - 1);
+	g_envv = realloc_envv(var_count - 1);
 }
 
-int		dad_unsetenv(char **args)
+int		dadsh_unsetenv(char **args)
 {
 	VAR(int, i, -1);
 	VAR(int, var_pos, 0);
@@ -56,5 +56,5 @@ int		dad_unsetenv(char **args)
 		if (g_envv[var_pos])
 			remove_envv(var_pos);
 	}
-
+	return (1);
 }

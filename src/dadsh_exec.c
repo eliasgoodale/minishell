@@ -6,16 +6,32 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/10 20:29:06 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/13 18:13:07 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
+
 #include "../include/cmd_tbl.h"
+
+char 	*ft_prepend_str(char *prefix, char *suffix)
+{
+	VAR(char*, ret, NULL);
+	VAR(int, i, -1);
+	VAR(int, j, -1);
+	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(prefix) + ft_strlen(suffix) + 1))))
+		throw_err("prepend str");
+	while(prefix[++i])
+		ret[i] = prefix[i];
+	while(suffix[++j])
+		ret[i++] = suffix[j];
+	ret[i] = '\0';
+	return (ret);
+}
 
 int		is_in_bins(char *command)
 {
-    VAR(DIR*, bin_folder, opendir("/usr/bin/"));
+    VAR(DIR*, bin_folder, opendir("/bin/"));
     VAR(t_dirent *, entry, NULL);
     while ((entry = readdir(bin_folder)))
         if (ft_strcmp(entry->d_name, command) == 0)
@@ -27,12 +43,11 @@ static int dadsh_run(char *path, char **args)
 {
 	pid_t	pid;
 	char	*bin_path;
-    if (is_in_bins(path))
-        path = ft_strcat("/usr/bin/", path);
+
 	pid = fork();
 	signal(SIGINT, dad_psignal);
-	if (pid == 0)
-		execve(path, args, g_envv);
+	if (pid == 0) 
+		execvp(path, args);
 	else if (pid < 0)
 	{
 		free(path);
@@ -48,8 +63,13 @@ static int dadsh_run(char *path, char **args)
 int		dadsh_launch(char **args)
 {
 	struct stat	fstat;
+	char *path;
 
-	if(lstat(args[0], &fstat) != -1)
+	if (is_in_bins(args[0]))
+		path = ft_prepend_str("/bin/" , args[0]);
+	else
+		path = ft_strdup(args[0]);
+	if(lstat(path, &fstat) != -1)
 	{
 		if(S_ISDIR(fstat.st_mode))
 		{
@@ -57,8 +77,9 @@ int		dadsh_launch(char **args)
 			return (0);
 		}
 		else if(fstat.st_mode & S_IXUSR)
-			return(dadsh_run(ft_strdup(args[0]), args));
+			return(dadsh_run(path, args));
 	}
+	return(1);
 }
 
 int		dadsh_exec(char **args)
@@ -85,6 +106,12 @@ int		dadsh_help(char **args)
 	return (1);
 }
 
+int		dadsh_env(char **args)
+{
+	(void)args;
+	print_env();
+	return (1);
+}
 int		dadsh_exit(char **args)
 {
 	(void)args;

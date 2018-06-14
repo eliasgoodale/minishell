@@ -12,15 +12,15 @@
 
 #ifndef CMD_TBL_H
 #define CMD_TBL_H
-#define MAX_BUILTINS 7
+#define MAX_BUILTINS 6
 
-char *builtin_str[MAX_BUILTINS] = {
+char *builtin_str[MAX_BUILTINS + 1] = {
 	"cd",
 	"echo",
 	"env",
 	"setenv",
 	"unsetenv",
-	"help",
+	"help"
 };
 
 typedef int (*t_builtin)(char**);

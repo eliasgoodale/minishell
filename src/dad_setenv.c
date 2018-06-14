@@ -12,22 +12,6 @@
 
 #include "../include/dadshell.h"
 
-char	**realloc_envv(int new_size)
-{
-	char	**new;
-	int		i;
-
-	new = (char **)ft_memalloc(sizeof(char *) * (new_size + 1));
-	i = -1;
-	while (g_envv[++i] && i < new_size)
-	{
-		new[i] = ft_strdup(g_envv[i]);
-		free(g_envv[i]);
-	}
-	free(g_envv);
-	return (new);
-}
-
 void	set_envv(char *key, char *val)
 {
 	VAR(int, pos, find_envv(key));
@@ -51,7 +35,7 @@ void	set_envv(char *key, char *val)
 	free(tmp);
 }
 
-int		dad_setenv(char **args)
+int		dadsh_setenv(char **args)
 {
 	if (!args[0])
 	{

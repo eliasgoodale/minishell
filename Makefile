@@ -14,10 +14,10 @@ NAME = dadshell
 HDR = include/dadshell.h
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
-SRC = main.c dadsh_exec.c dadsh_cd.c dad_echo.c dad_unsetenv.c dad_setenv.c dad_helper.c
+SRC = main.c dadsh_exec.c dadsh_cd.c dad_echo.c dad_unsetenv.c dad_setenv.c dad_helper.c dad_signal.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 CFLAGS = -g
-LIBFT_A = libs/libft.a
+LIBFT_A = dad_libs/libft.a
 
 all: $(NAME)
 
@@ -25,8 +25,7 @@ $(NAME): $(OBJ) $(LIBFT_A)
 	@CC $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
 $(OBJ): %.o: $(SRC_DIR)%.c
 	@CC -c $(CFLAGS) -I $(SRC_DIR) -I $(HDR) $< -o $@
-$(LIBFT_A):
-	@cd libft && make
+
 clean:
 	rm $(OBJ)
 fclean: clean

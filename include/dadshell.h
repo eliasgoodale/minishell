@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/11 13:22:46 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/13 18:15:47 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#define MAX_BUILTINS 3
-#define STD_ENV 1
+
+#define STD_ENV 2
 
 char **g_envv;
 
@@ -52,6 +52,7 @@ char	*get_envv(char *var);
 int		find_envv(char *var);
 void	throw_err(char *msg);
 char    **realloc_envv(int new_size);
+char 	*ft_prepend_str(char *prefix, char *suffix);
 /*
 ** Signal Handling
 */
