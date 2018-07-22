@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 16:40:11 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/11 14:56:05 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/06/14 11:38:32 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,23 @@ void	set_envv(char *key, char *val)
 
 int		dadsh_setenv(char **args)
 {
-	if (!args[0])
+	VAR(char *, val, args[0]);
+	if (!val)
 	{
 		print_env();
 		return (1);
 	}
+	val = ft_strchr(args[0],'=');
 	if(arr_len(args) > 2)
 	{
 		ft_printf("setenv: Too many arguments\n");
 		return (1);
 	}
-	set_envv(args[0], args[1]);
+	if(!val)
+	{
+		ft_printf("No Assignment: USAGE: setenv KEY=VAL\n");
+		return(1);
+	}
+	set_envv(split_envv_key(args[0]), val + 1);
 	return (1);
 }

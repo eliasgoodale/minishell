@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dadsh_cd.c                                         :+:      :+:    :+:   */
+/*   dad_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/09 14:48:23 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/14 09:35:24 by egoodale         ###   ########.fr       */
+/*   Created: 2018/07/14 12:02:16 by egoodale          #+#    #+#             */
+/*   Updated: 2018/07/21 18:22:33 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-int 	dadsh_cd(char **args)
+void dad_loop(int fd, t_vector	*line_in)
 {
-	VAR(char *, home_path, get_envv_val("HOME"));
-	VAR(char *, full_path, NULL);
-	if (args[0] == NULL)
-		chdir(home_path);
-	else
+	int status;
+
+	status = 1;
+	while (~fd && ~status && status)
 	{
-		if (args[0][0] == '~')
-		{
-			full_path = ft_prepend_str(home_path, &args[1][1]);
-			if(chdir(full_path))
-				ft_printf("No such file or directory");
-			free(full_path);
-		}
-		else if (chdir(args[0]))
-			ft_printf("No such file or directory\n");
+		ft_printf("\n> ");
+		signal(SIGINT, dad_signal);
+		if(~(fd = dad_input(fd, line_in)))
+			status = dadsh_exec(line_in->data);
 	}
-	return (1);
+	ft_freestrarr(g_envv);
 }

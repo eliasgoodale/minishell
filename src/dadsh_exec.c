@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/13 18:13:07 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:26:12 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,43 @@
 
 #include "../include/cmd_tbl.h"
 
+int		delta_exec(char *path, char **args)
+{
+	struct stat	fstat;
+
+	if(lstat(path, &fstat) != -1)
+	{
+		if(S_ISDIR(fstat.st_mode))
+		{
+			dadsh_cd(args);
+			return (1);
+		}
+		else if(fstat.st_mode & S_IXUSR)
+			return(dadsh_run(path, args));
+	}
+	ft_printf("%s : No such file or directory\n", path);
+	return (1);
+}
+
+int		inside_cwd(char *path)
+{
+	VAR(DIR*, dir, opendir("."));
+	VAR(t_dirent*, entry, NULL);
+	while((entry = readdir(dir)))
+	{
+		if (ft_strcmp(path, entry->d_name) == 0)
+			return (1);
+	}
+	return (0);
+}
+
 char 	*ft_prepend_str(char *prefix, char *suffix)
 {
 	VAR(char*, ret, NULL);
 	VAR(int, i, -1);
 	VAR(int, j, -1);
 	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(prefix) + ft_strlen(suffix) + 1))))
-		throw_err("prepend str");
+		ft_printf("prepend str");
 	while(prefix[++i])
 		ret[i] = prefix[i];
 	while(suffix[++j])
@@ -39,59 +69,61 @@ int		is_in_bins(char *command)
     return (0);
 }
 
-static int dadsh_run(char *path, char **args)
-{
-	pid_t	pid;
-	char	*bin_path;
 
-	pid = fork();
-	signal(SIGINT, dad_psignal);
-	if (pid == 0) 
-		execvp(path, args);
-	else if (pid < 0)
-	{
-		free(path);
-		throw_err("Fork failed to create a new process.");
-		return (-1);
-	}
-	wait(&pid);
-	if (path)
-		free(path);
-	return (1);
+
+
+
+char		**normalize_input(char *input)
+{
+	VAR(size_t, arglen, 0);
+	VAR(size_t, args, 1);
+	VAR(char, *seek, ft_strchr(input,)
+				
+	if ()
+	ft_subvector_slide(line_in, opnq, clsq, 1);
+
+
+
 }
 
-int		dadsh_launch(char **args)
-{
-	struct stat	fstat;
-	char *path;
-
-	if (is_in_bins(args[0]))
-		path = ft_prepend_str("/bin/" , args[0]);
-	else
-		path = ft_strdup(args[0]);
-	if(lstat(path, &fstat) != -1)
-	{
-		if(S_ISDIR(fstat.st_mode))
-		{
-			dadsh_cd(args);
-			return (0);
-		}
-		else if(fstat.st_mode & S_IXUSR)
-			return(dadsh_run(path, args));
-	}
-	return(1);
-}
-
-int		dadsh_exec(char **args)
+int		dadsh_exec(t_vector	*line_in)
 {
 	VAR(int, i, -1);
-	if(args[0] == NULL)
+	VAR(char **, args, NULL);
+	if(!(args = normalize_arguments(v->data)))
+		return (-1);
+	ft_putchar('\n')
+	
+	if(!line_in->data)
 		return (1);
 	while(++i < MAX_BUILTINS)
-		if (ft_strcmp(args[0], builtin_str[i]) == 0)
-			return(g_dadsh_cmds[i](args));
+		if (ft_strncmp(line_in->data, t_builtin[i].name, t_builtin[i].namelen) == 0)
+			return(g_dadsh_cmds[i](normalize_input(&args[1])));
+		else
+		
 	return (dadsh_launch(args));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int		dadsh_help(char **args)
 {
@@ -100,8 +132,8 @@ int		dadsh_help(char **args)
 	ft_printf("Dadshell: v 0.0.1\n");
 	ft_printf("Instructional help goes here\n");
 	ft_printf("The following builtins are present in this shell:\n");
-	while(builtin_str[i])
-		ft_printf("%d: %s\n", i + 1, builtin_str[i]);
+	while(g_builtin_str[++i])
+		ft_printf("%d: %s\n", i + 1, g_builtin_str[i]);
 	ft_printf("Use man command for information on other programs\n");
 	return (1);
 }

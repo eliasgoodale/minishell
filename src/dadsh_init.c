@@ -6,39 +6,33 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 19:17:38 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/11 12:46:24 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/21 10:34:44 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
+char	*std_envvlist[] = { 
+	"PATH=/bin/",
+	"HOME=/nfs/2018/e/egoodale/", 
+	"MAIL=eligoodale1@gmail.com"
+};
 
-
-/*void init_shell(int fd, char **env)
+int		dad_init_envv(char **custom)
 {
-	struct termios shell_tmodes;
-	pid_t shell_pgid;
-	int shell_terminal = fd;
-	int shell_is_interactive = isatty(shell_terminal);
-
-	if (shell_is_interactive)
+	VAR(int, envvs, STD_ENVV + ft_arrlen(custom));
+	VAR(int, i, -1);
+	VAR(int, j, 0);
+	if (~ft_vectorspace_init(&g_envv, DAD_PATH_MAX, envvs))
 	{
-		//while (tcgetpgrp(shell_terminal) != (shell_pgid = getpgrp()))
-		//	kill(- shell_pgid, SIGTTIN);
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGTSTP, SIG_IGN);
-		signal(SIGTTIN, SIG_IGN);
-		signal(SIGTTOU, SIG_IGN);
-		signal(SIGCHLD, SIG_IGN);
-		shell_pgid = getpid();
-		if (setpgid(shell_pgid, shell_pgid) < 0)
+		while(++i < STD_ENVV)
+			ft_vector_append(&g_envv[i], std_envvlist[i]);
+		while (++i < envvs)
 		{
-			throw_err("Couldn't put the shell in its own process group");
-			exit(1);
+			ft_vector_append(&g_envv[i], custom[j]);
+			j++;
 		}
-		tcsetpgrp(shell_terminal, shell_pgid);
-		tcgetattr(shell_terminal, &shell_tmodes);
-		
+		return (0);
 	}
-}*/
+	return (-1);
+}
