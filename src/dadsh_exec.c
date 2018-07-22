@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 18:26:12 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:49:38 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,6 @@ int		is_in_bins(char *command)
 
 
 
-char		**normalize_input(char *input)
-{
-	VAR(size_t, arglen, 0);
-	VAR(size_t, args, 1);
-	VAR(char, *seek, ft_strchr(input,)
-				
-	if ()
-	ft_subvector_slide(line_in, opnq, clsq, 1);
-
-
-
-}
 
 int		dadsh_exec(t_vector	*line_in)
 {
@@ -99,9 +87,7 @@ int		dadsh_exec(t_vector	*line_in)
 	while(++i < MAX_BUILTINS)
 		if (ft_strncmp(line_in->data, t_builtin[i].name, t_builtin[i].namelen) == 0)
 			return(g_dadsh_cmds[i](normalize_input(&args[1])));
-		else
-		
-	return (dadsh_launch(args));
+	return (dadsh_launch(line_in->data));
 }
 
 

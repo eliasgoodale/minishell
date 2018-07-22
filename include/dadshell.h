@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 17:39:51 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/21 19:11:28 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-typedef enum	e_dadsh_constants
+enum	e_dadsh_constants
 {
 	STD_ENVV = 3,
-	BUILTINS 7,
+	BUILTINS = 7,
 	LINE_IN_CAP = 50,
 	DAD_PATH_MAX = 1024
 
 };
 
+size_t			g_exec_args;
 const char		*g_quotes = "\'\"`";
 
 extern	t_vector *g_envv;

@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 13:27:15 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 18:40:33 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/21 19:14:32 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ void     quote_message(char quote)
 		ft_printf("\nbquote> ");
 }
 
+size_t		count_args(char *start)
+{
+
+}
+
+char		**normalize_input(char *input)
+{
+	VAR(char **, args, ft_memalloc(sizeof(char *) * g_exec_args));
+	
+
+}
+	
+
+
+
+
+}
 
 void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd)
 {
@@ -34,7 +51,6 @@ void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd)
     	prompt_user(v, &(*opnq), clsq, fd);
 		*opnq ? ft_subvector_slide(v, clsq, opnq, 1) :
 			ft_subvector_slide(v, clsq, opnq, 1);
-			
 	}
 	else
 	{
@@ -58,6 +74,8 @@ char		**dad_input(t_vector *line_in, char *opnq, char *clsq, int fd)
 		{
 			opnq = find_next_any(clsq, g_quotes);
 			prompt_user(line_in, &(*opnq), clsq, fd);
+			if (opnq)
+				ft_subvector_slide(line_in, opnq, clsq, 1);
 		}
 		else
 			ft_vector_append(line_in, "\n");
