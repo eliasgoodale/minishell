@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:17:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 09:29:16 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/24 11:46:58 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int		main(int ac, char **envv)
 	(~ft_vector_init(&line_in, LINE_IN_CAP) &&
 	(~dad_envv_init(envv))))
 		dad_loop(fd);
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }

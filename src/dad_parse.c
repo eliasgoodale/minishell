@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 10:41:53 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/18 13:27:00 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/09/23 13:47:51 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char    *request_quote(char quote)
         return(NULL);
 }
 
-/*
+
 static inline void  normalize_quotes(char *line, size_t len);
 {
     char    *norm;
@@ -119,7 +119,7 @@ static inline void  normalize_quotes(char *line, size_t len);
         }
     }
 }
-*/
+
 
 static inline void normalize_quotes(char *opnq, char* endq)
 {

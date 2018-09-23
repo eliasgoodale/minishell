@@ -6,7 +6,7 @@
 #    By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/09 15:40:12 by egoodale          #+#    #+#              #
-#    Updated: 2018/07/14 12:11:48 by egoodale         ###   ########.fr        #
+#    Updated: 2018/07/24 11:43:25 by egoodale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ $(NAME): $(OBJ) $(LIBFT_A)
 	@CC $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
 $(OBJ): %.o: $(SRC_DIR)%.c
 	@CC -c $(CFLAGS) -I $(SRC_DIR) -I $(HDR) $< -o $@
-
 clean:
 	rm $(OBJ)
 fclean: clean

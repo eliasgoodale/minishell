@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 13:27:15 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 19:14:32 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/07/22 16:37:58 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,18 @@ void     quote_message(char quote)
 		ft_printf("\nbquote> ");
 }
 
-size_t		count_args(char *start)
-{
-
-}
-
 char		**normalize_input(char *input)
 {
 	VAR(char **, args, ft_memalloc(sizeof(char *) * g_exec_args));
-	
-
-}
-	
-
-
-
-
+	VAR(char *, tok, ft_strtok(input, g_quotes));
+	VAR(int, i, 0);
+	while(tok)
+	{
+		args[i++] = ft_strdup(tok);
+		tok = ft_strtok(input, g_quotes);
+	}
+	args[i] = NULL;
+	return(args);
 }
 
 void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd)
@@ -55,6 +51,7 @@ void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd)
 	else
 	{
 		quote_message(*opnq);
+		g_exec_args++;
 		fd = dad_input(v, &(*opnq), NULL, fd);
 		prompt_user(v, opnq, clsq, fd);
 	}
