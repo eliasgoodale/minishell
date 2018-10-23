@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 11:11:26 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 14:58:21 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:55:50 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int		build_path(char **args)
 {
 	VAR(char *, full_path, NULL);
 	VAR(char *, path_envv, get_envv_val("PATH"));
-	VAR(char *, search_directory, ft_strtok(path_envv, ":"));
+	VAR(char *, search_directory, NULL);
 	path_envv = path_envv ? ft_strdup(path_envv) : NULL;
+	search_directory = ft_strtok(path_envv, ":");
 	if (is_in(".", args[0]))
 		full_path = ft_strdup(args[0]);
 	else
