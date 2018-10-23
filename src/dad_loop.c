@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 12:02:16 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/22 16:33:05 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/18 16:00:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void dad_loop(int fd, t_vector	*line_in)
 		ft_printf("\n> ");
 		signal(SIGINT, dad_signal);
 		if((args = dad_input(line_in, NULL, line_in->data, fd)))
-			status = dadsh_exec(args);
+			status = dad_exec(args);
 		g_exec_args = 1;
 	}
 }

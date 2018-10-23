@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 19:11:28 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:55:22 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ extern	t_vector *g_envv;
 typedef struct dirent	t_dirent;
 
 void 	dad_loop(int fd);
-int		dadsh_launch(char **args);
-int		dadsh_exec(char **args);
 void	put_help_msg(void);
-
+int		dad_init_envv(char **custom);
 /*
 ** Process Execution
 */
-int		dadsh_exec(char **args);
+int		dad_exec(t_vector *line_in);
 int		delta_exec(char *path, char **args);
-static  int dadsh_run(char *path, char **args);
+int		dad_launch(char **args);
+static  int dad_run(char *path, char **args);
 
 /*
 ** Helper
@@ -85,6 +84,14 @@ int		dad_setenv(char **args);
 int		dad_unsetenv(char **args);
 int		dad_help(char **args);
 int		dad_exit(char **args);
+
+/*
+**	Input Scrubbing
+*/
+char		**dad_input(t_vector *line_in, char *opnq, char *clsq, int fd);
+void		quote_message(char quote);
+char		**normalize_input(char *input);
+void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd);
 
 typedef	int		(*t_dadfunc)(char **args);
 static struct	s_builtin

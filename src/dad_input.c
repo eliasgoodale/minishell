@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 13:27:15 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/22 16:37:58 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:57:17 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd)
 		if(!(opnq = find_next_any(clsq + 1, g_quotes)))
 			opnq = v->data + v->len;
     	prompt_user(v, &(*opnq), clsq, fd);
-		*opnq ? ft_subvector_slide(v, clsq, opnq, 1) :
-			ft_subvector_slide(v, clsq, opnq, 1);
+		*opnq ? ft_subvector_slide(clsq, opnq, 1) :
+			ft_subvector_slide(clsq, opnq, 1);
 	}
 	else
 	{
@@ -76,7 +76,7 @@ char		**dad_input(t_vector *line_in, char *opnq, char *clsq, int fd)
 		}
 		else
 			ft_vector_append(line_in, "\n");
-		return(normalize_arguments(line_in->data));
+		return(normalize_input(line_in->data));
 	}
 	return (NULL);
 }

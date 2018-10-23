@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dadsh_launch.c                                     :+:      :+:    :+:   */
+/*   dad_launch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "../include/dadshell.h"
 
 
-static int dadsh_run(char *path, char **args)
+static int dad_run(char *path, char **args)
 {
 	pid_t	pid;
 	char	*bin_path;
@@ -34,7 +34,7 @@ static int dadsh_run(char *path, char **args)
 	return (1);
 }
 
-int		dadsh_launch(char **args)
+int		dad_launch(char **args)
 {
 	VAR(char *, full_path, NULL);
 	VAR(char*, path_envv, get_envv_val("PATH"));
@@ -51,7 +51,7 @@ int		dadsh_launch(char **args)
 
 
 /*
-int		dadsh_launch(char **args)
+int		dad_launch(char **args)
 {
 	pid_t pid;
 	pid_t wpid;
@@ -63,7 +63,7 @@ int		dadsh_launch(char **args)
 	else if (pid == 0)
 	{
 		if (execvp(args[0], args) == -1)
-			ft_printf("dadsh");
+			ft_printf("dad");
 	}
 	else
 	{

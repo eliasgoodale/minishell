@@ -6,13 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:23:27 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/21 18:49:38 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:58:33 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
-
-#include "../include/cmd_tbl.h"
 
 int		delta_exec(char *path, char **args)
 {
@@ -22,11 +20,11 @@ int		delta_exec(char *path, char **args)
 	{
 		if(S_ISDIR(fstat.st_mode))
 		{
-			dadsh_cd(args);
+			dad_cd(args);
 			return (1);
 		}
 		else if(fstat.st_mode & S_IXUSR)
-			return(dadsh_run(path, args));
+			return(dad_run(path, args));
 	}
 	ft_printf("%s : No such file or directory\n", path);
 	return (1);
@@ -69,25 +67,19 @@ int		is_in_bins(char *command)
     return (0);
 }
 
-
-
-
-
-
-int		dadsh_exec(t_vector	*line_in)
+int		dad_exec(t_vector	*line_in)
 {
 	VAR(int, i, -1);
 	VAR(char **, args, NULL);
-	if(!(args = normalize_arguments(v->data)))
+	if(!(args = normalize_input(line_in->data)))
 		return (-1);
-	ft_putchar('\n')
-	
+	ft_putchar('\n');
 	if(!line_in->data)
 		return (1);
-	while(++i < MAX_BUILTINS)
-		if (ft_strncmp(line_in->data, t_builtin[i].name, t_builtin[i].namelen) == 0)
-			return(g_dadsh_cmds[i](normalize_input(&args[1])));
-	return (dadsh_launch(line_in->data));
+	while(++i < BUILTINS)
+		if (ft_strncmp(line_in->data, t_builtin[i].name, t_builtin[i].tokenlen) == 0)
+			return(t_builtin[i].dadfunc(args));
+	return (dad_launch(args));
 }
 
 
@@ -111,11 +103,11 @@ int		dadsh_exec(t_vector	*line_in)
 
 
 
-int		dadsh_help(char **args)
+int		dad_help(char **args)
 {
 	VAR(int, i, -1);
 	(void)args;
-	ft_printf("Dadshell: v 0.0.1\n");
+	ft_printf("Dad Shell: v 0.0.1\n");
 	ft_printf("Instructional help goes here\n");
 	ft_printf("The following builtins are present in this shell:\n");
 	while(g_builtin_str[++i])
@@ -124,13 +116,13 @@ int		dadsh_help(char **args)
 	return (1);
 }
 
-int		dadsh_env(char **args)
+int		dad_env(char **args)
 {
 	(void)args;
 	print_env();
 	return (1);
 }
-int		dadsh_exit(char **args)
+int		dad_exit(char **args)
 {
 	(void)args;
 	return (0);
