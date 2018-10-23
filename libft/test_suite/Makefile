@@ -5,35 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/10/18 16:38:40 by egoodale          #+#    #+#              #
-#    Updated: 2018/10/23 13:49:52 by egoodale         ###   ########.fr        #
+#    Created: 2018/07/15 12:27:58 by egoodale          #+#    #+#              #
+#    Updated: 2018/07/15 12:33:59 by egoodale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
-INCLUDE = ./include/dadshell.h
-SRC_DIR = ./src/
-SRC = 	builtins.c echo.c env_helper.c\
-		exec.c helper.c input.c\
-		main.c setenv.c unsetenv.c\
-
-OBJ_DIR = ./obj/
-OBJ = $(patsubst %.c, %.o, $(SRC))
-CFLAGS = -Wall -Werror -Wextra
-LIBFT_A = libft/libft.a
-
+NAME = test_suite
+MAIN_DRIVER = main.c
+LIBFT_A = ../libft.a
+HDR = ~/HDR/
+CFLAGS = -Wall -Werror -Wextra -g
 all: $(NAME)
-	@mv $(OBJ) $(OBJ_DIR)
 
-$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_A)
-	@CC $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
-$(OBJ): %.o: $(SRC_DIR)%.c
-	@CC -c $(CFLAGS) -I $(SRC_DIR) -I $(INCLUDE) $< -o $@
-$(OBJ_DIR):
-	@mkdir $(OBJ_DIR)
-
-clean:
-	rm -rf $(OBJ_DIR)
-fclean: clean
-	rm -rf $(NAME)
-re: fclean all 
+$(NAME): $(MAIN_DRIVER) $(LIBFT_A)
+	gcc $(CFLAGS) -I $(HDR) $(MAIN_DRIVER) -o $(NAME) $(LIBFT_A)

@@ -6,16 +6,16 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 16:06:13 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 10:32:44 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:49:33 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DADSHELL_H
 #define DADSHELL_H
 
-#include <libft.h>
-#include <ft_printf.h>
-#include <get_next_line.h>
+#include "../libft/include/libft.h"
+#include "../libft/include/ft_printf.h"
+#include "../libft/include/get_next_line.h"
 #include <sys/types.h>
 #include <termios.h>
 #include <unistd.h>
