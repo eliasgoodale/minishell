@@ -6,7 +6,7 @@
 #    By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/18 16:38:40 by egoodale          #+#    #+#              #
-#    Updated: 2018/10/23 14:41:09 by egoodale         ###   ########.fr        #
+#    Updated: 2018/10/23 16:00:35 by egoodale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ)
 fclean: clean
 	rm -rf $(NAME)
 re: fclean all 
