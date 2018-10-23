@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 14:07:51 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/18 15:55:22 by egoodale         ###   ########.fr       */
+/*   Created: 2018/10/18 16:06:13 by egoodale          #+#    #+#             */
+/*   Updated: 2018/10/23 10:32:44 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,93 +26,57 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-enum	e_dadsh_constants
-{
-	STD_ENVV = 3,
-	BUILTINS = 7,
-	LINE_IN_CAP = 50,
-	DAD_PATH_MAX = 1024
+#define BUILTINS 7
+#define STD_ENVV 3
+#define VECTOR_CAP 50
 
-};
+extern char **g_envv;
+extern size_t g_envv_len;
+extern const char *std_envvlist[];
+extern t_vector g_linev;
 
-size_t			g_exec_args;
-const char		*g_quotes = "\'\"`";
 
-extern	t_vector *g_envv;
 
-typedef struct dirent	t_dirent;
+int         loop (int fd);
 
-void 	dad_loop(int fd);
-void	put_help_msg(void);
-int		dad_init_envv(char **custom);
-/*
-** Process Execution
-*/
-int		dad_exec(t_vector *line_in);
-int		delta_exec(char *path, char **args);
-int		dad_launch(char **args);
-static  int dad_run(char *path, char **args);
+/* Builtins */
+int		cd(char **args);
+int     print_env(char **args);
+int		display_help(char **args);
+int		exit_shell(char **args);
+int		echo(char **args);
+int		set_env(char **args);
+int		unset_env(char **args);
 
-/*
-** Helper
-*/
-void	ft_freestrarr(char **arr);
-int		arr_len(char **arr);
-int 	print_env(void);
-void	init_envv(char **env);
-int		find_envv(char *var);
-char    **realloc_envv(int new_size);
-char 	*ft_prepend_str(char *prefix, char *suffix);
-char    *get_envv_val(char *envv_str);
-char    *split_envv_key(char *envv_str);
-int		inside_cwd(char *path);
-char 	*ft_prepend_str(char *prefix, char *suffix);
-/*
-** Signal Handling
-*/
-void	dad_signal(int sig);
-void	dad_psignal(int sig);
-
-/* 
-** Built-Ins
-*/
-int		dad_cd(char **args);
-int		dad_echo(char **args);
-void	echo_out(char **args);
-int		dad_env(char **args);
-int		dad_setenv(char **args);
-int		dad_unsetenv(char **args);
-int		dad_help(char **args);
-int		dad_exit(char **args);
-
-/*
-**	Input Scrubbing
-*/
-char		**dad_input(t_vector *line_in, char *opnq, char *clsq, int fd);
-void		quote_message(char quote);
+/* Input Handler */
+void        quote_message(char quote);
 char		**normalize_input(char *input);
-void         prompt_user(t_vector *v, char *opnq, char *clsq, int fd);
+int         initialize_linefeed(int fd);
+char        **parse_quotes(int fd);
+char		**get_user_input(int fd);
 
-typedef	int		(*t_dadfunc)(char **args);
-static struct	s_builtin
-{
-	char		*name;
-	size_t		tokenlen;
-	t_dadfunc	dadfunc;
-}
-t_builtin[BUILTINS] = {
-	{"cd", 2, &dad_cd},
-	{"echo", 4, &dad_echo},
-	{"env", 3, &dad_env},
-	{"setenv", 6, &dad_setenv},
-	{"unsetenv", 8, &dad_unsetenv},
-	{"help", 4, &dad_help},
-	{"exit", 4, &dad_exit}
-};
+/* General Helpers */
+int         is_in(char *directory_name, char *executable);
+void        handle_signal(int sig);
+
+/* Environment Helpers */
+char        *get_envv_val(char *envv_name);
+char        *get_envv_key(char *envv_str);
+char        **realloc_envv(int new_size);
+int         find_envv(char *var);
+int         init_envv(char **received_envv);
+  
+/* Process Execution */
+int		    run(char *path, char **args);
+int         delta_exec(char *path, char **args);
+int         launch(char **args);
+int         execute(char **args);
 
 
 
 
+typedef	int		(*t_builtinfunc)(char **args);
+typedef struct dirent	t_dirent;
 
 
 

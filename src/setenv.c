@@ -1,59 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dad_setenv.c                                       :+:      :+:    :+:   */
+/*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/10 16:40:11 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/22 11:39:08 by egoodale         ###   ########.fr       */
+/*   Created: 2018/10/20 15:29:03 by egoodale          #+#    #+#             */
+/*   Updated: 2018/10/23 13:31:37 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/dadshell.h"
 
-void	set_envv(char *key, char *val)
+void	set_variable(char *key, char *val)
 {
 	VAR(int, pos, find_envv(key));
-	VAR(char *, tmp, ft_strjoin("=", val));
-	if(g_envv[pos])
+	if (~pos)
 	{
 		free(g_envv[pos]);
 		if (val)
-			g_envv[pos] = ft_strjoin(key, tmp);
+			g_envv[pos] = ft_join(key, "=", val);
 		else
 			g_envv[pos] = ft_strjoin(key, "=");
 	}
 	else
 	{
-		g_envv = realloc_envv(pos + 1);
+		g_envv = realloc_envv(g_envv_len + 1);
 		if (val)
-			g_envv[pos] = ft_strjoin(key, tmp);
+			g_envv[g_envv_len - 1] = ft_join(key, "=", val);
 		else
-			g_envv[pos] = ft_strjoin(key, "=");
+			g_envv[g_envv_len - 1] = ft_strjoin(key, "=");
 	}
-	free(tmp);
+	free(key);
 }
 
-int		dadsh_setenv(char **args)
+int		set_env(char **args)
 {
-	VAR(char *, val, args[0]);
-	if (!val)
+	VAR(int, i, -1);
+	VAR(char *, val, NULL);
+	VAR(char *, key, NULL);
+	while (args[++i])
 	{
-		print_env();
-		return (1);
+		val = ft_strchr(args[i], '=');
+		key = get_envv_key(args[i]);
+		if (key && val)
+			set_variable(key, (val + 1));
+		else
+			ft_printf("No Assignment: USAGE: setenv KEY=VAL\n");
 	}
-	val = ft_strchr(args[0],'=');
-	if(arr_len(args) > 2)
-	{
-		ft_printf("setenv: Too many arguments\n");
-		return (1);
-	}
-	if(!val)
-	{
-		ft_printf("No Assignment: USAGE: setenv KEY=VAL\n");
-		return(1);
-	}
-	set_envv(split_envv_key(args[0]), val + 1);
 	return (1);
 }

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dad_loop.c                                         :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/14 12:02:16 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/18 16:00:53 by egoodale         ###   ########.fr       */
+/*   Created: 2018/10/23 13:15:00 by egoodale          #+#    #+#             */
+/*   Updated: 2018/10/23 13:18:31 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/dadshell.h"
+#	ifndef BUILTINS_H
+#	define BUILTINS_H
 
-void dad_loop(int fd, t_vector	*line_in)
+#include "dadshell.h"
+
+static struct	s_builtin
 {
-	int status;
-	char **args;
-	
-	status = 1;
-	while (~fd && ~status && status)
-	{
-		ft_printf("\n> ");
-		signal(SIGINT, dad_signal);
-		if((args = dad_input(line_in, NULL, line_in->data, fd)))
-			status = dad_exec(args);
-		g_exec_args = 1;
-	}
-}
+	char		*name;
+	t_builtinfunc	func;
+}				t_builtin[BUILTINS] = {
+	{"cd", &cd},
+	{"echo", &echo},
+	{"env", &print_env},
+	{"setenv", &set_env},
+	{"unsetenv", &unset_env},
+	{"help", &display_help},
+	{"exit", &exit_shell}
+};
+
+#	endif

@@ -1,8 +1,0 @@
-SHELL=get_directory_of_project
-HOME=/nfs/2018/e/egoodale/
-USER=unknown
-MAIL=eligoodale1@gmail.com
-PWD=print_working_directory
-SHLVL=process_order (parent/child relationships)
-LANG=en_US.UTF-8
-TERM=xterm-256color
