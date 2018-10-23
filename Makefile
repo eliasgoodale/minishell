@@ -6,7 +6,7 @@
 #    By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/18 16:38:40 by egoodale          #+#    #+#              #
-#    Updated: 2018/10/23 16:00:35 by egoodale         ###   ########.fr        #
+#    Updated: 2018/10/23 16:03:33 by egoodale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ all: $(NAME)
 
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_A)
-	@CC $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
+	gcc $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
 $(OBJ): %.o: $(SRC_DIR)%.c
-	@CC -c $(CFLAGS) -I $(SRC_DIR) -I $(INCLUDE) $< -o $@
+	gcc -c $(CFLAGS) -I $(SRC_DIR) -I $(INCLUDE) $< -o $@
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
