@@ -6,11 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 09:48:14 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/20 08:24:02 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:20:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../include/libft.h"
 
 void	ft_charswap(char *a, char *b)
 {

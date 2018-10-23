@@ -6,14 +6,14 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 09:54:52 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/20 17:52:16 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:17:59 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #	ifndef LIBFT_H
 #	define LIBFT_H
 
-#include <macrosoft.h>
+#include "macrosoft.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
@@ -53,7 +53,8 @@ typedef struct		s_vector
 ** Bitwise Handlers
 */
 
-uintmax_t			ft_bitinsert(uintmax_t nb, uintmax_t ins, unsigned lb, unsigned ub);
+uintmax_t			ft_bitinsert(uintmax_t nb, uintmax_t ins,
+					unsigned lb, unsigned ub);
 void				ft_printbits(uintmax_t nb);
 uintmax_t			get_msb(uintmax_t nb);
 
@@ -77,7 +78,6 @@ int					ft_isalnum(int c);
 int					ft_wchrlen(wchar_t c);
 int					ft_isspace(int c);
 void				ft_charswap(char *a, char *b);
-
 
 /*
 ** Conversions
@@ -205,7 +205,8 @@ size_t				ft_arrlen(char **arr);
 t_vector			**ft_vectorspace_create(size_t init_cap, size_t size);
 t_vector			*ft_vector_create(size_t init_cap);
 void				ft_vectorspace_free(t_vector **vspace, int size);
-void				ft_subvector_slide(char *data, char *target, size_t data_len);
+void				ft_subvector_slide(char *data, char *target,
+					size_t data_len);
 int					ft_vector_init(t_vector *vector, size_t init_cap);
 void				ft_vector_append(t_vector *vector, char *newdata);
 void				ft_vector_resize(t_vector *vector, size_t min);

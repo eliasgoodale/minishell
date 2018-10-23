@@ -6,11 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 09:54:40 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/24 12:12:44 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:20:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../include/libft.h"
 
 char	*find_last_any(char *haystack, const char *any)
 {

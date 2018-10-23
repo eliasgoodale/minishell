@@ -6,11 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 13:34:45 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/14 10:04:03 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:20:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../include/libft.h"
 
 uintmax_t		ft_bitinsert(uintmax_t nb, uintmax_t ins,
 								unsigned lb, unsigned ub)

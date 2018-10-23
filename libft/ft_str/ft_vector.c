@@ -6,11 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 14:52:46 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/18 18:14:14 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:20:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../include/libft.h"
 
 int		ft_vector_init(t_vector *vector, size_t init_cap)
 {

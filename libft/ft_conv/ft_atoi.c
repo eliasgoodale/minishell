@@ -6,11 +6,11 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 18:26:22 by egoodale          #+#    #+#             */
-/*   Updated: 2018/07/15 12:24:16 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:20:53 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../include/libft.h"
 
 int		ft_atoi(const char *str)
 {

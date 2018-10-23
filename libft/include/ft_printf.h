@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:18:18 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/09 18:58:14 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:00:08 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #	define FT_PRINTF_H
 
 #include <stdarg.h>
-#include <libft.h>
+#include "libft.h"
 #define VALID_LEN_MOD(x) (x == 'h' || x == 'l' || x == 'z' || x == 'j' ? 1 : 0)
 #define MAX_FORMATS 17
 

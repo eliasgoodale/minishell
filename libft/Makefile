@@ -32,8 +32,7 @@ FT_BIT_OBJ = $(patsubst %.c, %.o, $(FT_BIT_SRC))
 BIT_OBJ_DIR = ./obj/bit_obj/
 
 FT_MATH_DIR = ./ft_math/
-FT_MATH_SRC =	ft_lcm.c\
-				#ft_rand.c
+FT_MATH_SRC =	ft_lcm.c
 FT_MATH_OBJ = $(patsubst %.c, %.o, $(FT_MATH_SRC))
 MATH_OBJ_DIR = ./obj/math_obj/
 

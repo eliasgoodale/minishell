@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 13:15:00 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 13:18:31 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:33:21 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 #include "dadshell.h"
 
-static struct	s_builtin
+typedef	int		(*t_builtinfunc)(char **args);
+
+static struct		s_builtin
 {
-	char		*name;
+	char			*name;
 	t_builtinfunc	func;
-}				t_builtin[BUILTINS] = {
+}
+t_builtin[BUILTINS] = {
 	{"cd", &cd},
 	{"echo", &echo},
 	{"env", &print_env},

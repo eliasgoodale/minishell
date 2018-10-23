@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:23:29 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 13:32:32 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:19:35 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		unset_env(char **args)
 	VAR(int, var_pos, 0);
 	VAR(char *, key, NULL);
 	if (!args[0])
-		ft_printf("unsetenv: Too few arguments.");
+		ft_printf("unsetenv: Too few arguments.\n");
 	while (args[++i])
 	{
 		key = get_envv_key(args[i]);
@@ -41,7 +41,7 @@ int		unset_env(char **args)
 		if (~var_pos)
 			remove_envv(var_pos);
 		else
-			ft_printf("%s is not an env variable", key);
+			ft_printf("%s is not an env variable\n", key);
 		free(key);
 	}
 	return (1);

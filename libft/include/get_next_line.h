@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 19:46:43 by egoodale          #+#    #+#             */
-/*   Updated: 2018/06/09 18:58:44 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:00:51 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <libft.h>
+#include "libft.h"
 
 typedef struct	s_gnl {
 	char		str[BUFF_SIZE + 1];

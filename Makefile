@@ -6,7 +6,7 @@
 #    By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/18 16:38:40 by egoodale          #+#    #+#              #
-#    Updated: 2018/10/23 13:49:52 by egoodale         ###   ########.fr        #
+#    Updated: 2018/10/23 14:41:09 by egoodale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ SRC = 	builtins.c echo.c env_helper.c\
 
 OBJ_DIR = ./obj/
 OBJ = $(patsubst %.c, %.o, $(SRC))
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g 
 LIBFT_A = libft/libft.a
 
 all: $(NAME)
-	@mv $(OBJ) $(OBJ_DIR)
+
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_A)
 	@CC $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
