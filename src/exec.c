@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 11:11:26 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 15:55:50 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 11:06:48 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		launch(char *path, char **args)
 {
 	struct stat fstat;
 
-	if (~lstat(path, &fstat))
+	if (~lstat(path, &fstat) || !path)
 	{
 		if (fstat.st_mode & S_IXUSR)
 			return (run(path, args));
@@ -61,13 +61,12 @@ int		build_path(char **args)
 		{
 			if (is_in(search_directory, args[0]))
 			{
-				full_path = ft_prepend_str(search_directory, args[0]);
+				full_path = ft_join(search_directory, "/", args[0]);
 				break ;
 			}
 			search_directory = ft_strtok(NULL, ":");
 		}
 	}
-	!full_path ? full_path = ft_strdup(args[0]) : 0;
 	free(path_envv);
 	return (launch(full_path, args));
 }
@@ -75,6 +74,8 @@ int		build_path(char **args)
 int		execute(char **args)
 {
 	VAR(int, i, -1);
+	if(ft_str_is_char(args[0], '.'))
+		return(cd(args));
 	while (++i < BUILTINS)
 		if (ft_strcmp(args[0], t_builtin[i].name) == 0)
 			return (t_builtin[i].func(&args[1]));

@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 09:54:52 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 14:17:59 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/23 19:04:52 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void				ft_putchar_fd(char c, int fd);
 ** String Manipulation
 */
 
+int					ft_str_is_char(char *s, char c);
 wchar_t				*ft_wstrdup(wchar_t *str);
 char				*ft_wstr_to_str(wchar_t *ws);
 size_t				ft_wstrlen(wchar_t *str);

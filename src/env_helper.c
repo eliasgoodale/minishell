@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:54:05 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 15:18:36 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 12:54:36 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 char **g_envv;
 size_t g_envv_len;
-const char *g_std_envvlist[] = {
-	"PATH=/bin/:/usr/bin/",
-	"HOME=/nfs/2018/e/egoodale/",
-	"TERM=xterm-256color"
-};
 
-char	*get_envv_val(char *envv_name)
+char	*get_envv_val(char *key)
 {
 	VAR(int, i, -1);
-	VAR(size_t, len, ft_strlen(envv_name));
+	VAR(size_t, len, ft_strlen(key));
 	while (g_envv[++i])
-		if (ft_strncmp(g_envv[i], envv_name, len) == 0)
+		if (ft_strncmp(g_envv[i], key, len) == 0)
 			return (ft_strchr(g_envv[i], '=') + 1);
 	return (NULL);
 }
@@ -66,23 +61,34 @@ int		find_envv(char *key)
 	return ((size_t)i == g_envv_len ? -1 : i);
 }
 
-int		init_envv(char **received_envv)
+void	translate_envv_args(char **args)
 {
-	VAR(unsigned, i, 0);
-	VAR(size_t, len, STD_ENVV + ft_arrlen(received_envv));
-	if (!(g_envv = ft_memalloc(sizeof(char *) * (len + 1))))
-		return (-1);
-	while (i < STD_ENVV)
+	int i;
+	char *key;
+	char *val;
+	char *start;
+	char *envv_start;
+
+	t_vector translated;
+
+	i = -1;
+	while (args[++i])
 	{
-		g_envv[i] = ft_strdup(g_std_envvlist[i]);
-		i++;
+		if(!(start = ft_strchr(args[i], '$')))
+			continue;
+		ft_vector_init(&translated, 50);
+		ft_vector_nappend(&translated, args[i], start - args[i]);
+		while((envv_start = ft_strchr(start, '$')))
+		{
+			start = find_next_any(envv_start, SEPARATORS);
+			key = ft_strndup(envv_start + 1, (start - envv_start - 1));
+			val = get_envv_val(key);
+			ft_vector_append(&translated, val ? val : "");
+			ft_vector_nappend(&translated, start, envv_start - start);
+			free(key);
+		}
+		free(args[i]);
+		args[i] = ft_strdup(translated.data);
+		ft_vector_free(&translated);
 	}
-	while (i < len)
-	{
-		g_envv[i] = ft_strdup(received_envv[i - STD_ENVV]);
-		i++;
-	}
-	g_envv_len = i;
-	g_envv[i] = NULL;
-	return (1);
 }

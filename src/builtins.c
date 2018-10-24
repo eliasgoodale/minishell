@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:48:23 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 13:33:07 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 11:07:09 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		cd(char **args)
 		chdir(home_path);
 	else
 	{
-		if (args[0][0] == '~')
+		if (home_path && args[0][0] == '~')
 		{
 			full_path = ft_prepend_str(home_path, &args[0][1]);
 			if (chdir(full_path))

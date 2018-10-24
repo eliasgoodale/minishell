@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 16:06:13 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 14:52:23 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 12:31:22 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
+#define SEPARATORS "!#%&()*+=`^,-./{|}~\0"
 #define BUILTINS 7
-#define STD_ENVV 3
+#define STD_ENVV 0
 #define VECTOR_CAP 50
 
 extern char			**g_envv;
@@ -71,7 +72,7 @@ char	*get_envv_val(char *envv_name);
 char	*get_envv_key(char *envv_str);
 char	**realloc_envv(int new_size);
 int		find_envv(char *var);
-int		init_envv(char **received_envv);
+void	translate_envv_args(char **args);
 
 /*
 ** Process Execution

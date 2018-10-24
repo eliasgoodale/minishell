@@ -78,7 +78,8 @@ FT_LST_OBJ = $(patsubst %.c, %.o, $(FT_LST_SRC))
 LST_OBJ_DIR = ./obj/lst_obj/
 
 FT_STR_DIR = ./ft_str/
-FT_STR_SRC =	ft_join.c\
+FT_STR_SRC =	ft_str_is_char.c\
+				ft_join.c\
 				ft_prepend_str.c\
 				ft_freestrarr.c\
 				ft_vector_create.c\
