@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 11:11:26 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/24 11:06:48 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 18:26:29 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		launch(char *path, char **args)
 {
 	struct stat fstat;
 
-	if (~lstat(path, &fstat) || !path)
+	if (path && ~lstat(path, &fstat))
 	{
 		if (fstat.st_mode & S_IXUSR)
 			return (run(path, args));
@@ -40,7 +40,7 @@ int		launch(char *path, char **args)
 	}
 	else
 	{
-		ft_printf("dsh: command not found %s\n", path);
+		ft_printf("dsh: command not found: %s\n", args[0]);
 		free(path);
 	}
 	return (1);
@@ -49,7 +49,7 @@ int		launch(char *path, char **args)
 int		build_path(char **args)
 {
 	VAR(char *, full_path, NULL);
-	VAR(char *, path_envv, get_envv_val("PATH"));
+	VAR(char *, path_envv, find_envv("PATH", 1));
 	VAR(char *, search_directory, NULL);
 	path_envv = path_envv ? ft_strdup(path_envv) : NULL;
 	search_directory = ft_strtok(path_envv, ":");

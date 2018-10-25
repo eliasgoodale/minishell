@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:48:23 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/24 11:07:09 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 18:39:57 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,40 @@ void	determine_chdir_error(char *path)
 		ft_printf("cd: no such file or directory: %s\n", path);
 }
 
+void	update_oldpwd(char *oldwd)
+{
+	VAR(char *, u_env, NULL);
+	VAR(char **, u_oldpwd, NULL);
+	if (oldwd)
+	{
+		u_env = ft_strjoin("OLDPWD=", oldwd);
+		u_oldpwd = ft_strsplit(u_env, ' ');
+		set_env(u_oldpwd);
+		ft_freestrarr(u_oldpwd);
+		free(u_env);
+	}
+}
+
 int		cd(char **args)
 {
-	VAR(char *, home_path, get_envv_val("HOME"));
+	VAR(char *, envv_path, find_envv("HOME", 1));
 	VAR(char *, full_path, NULL);
-	if (args[0] == NULL)
-		chdir(home_path);
+	VAR(char *, cwd, getcwd(NULL, 0));
+	if (envv_path && !args[0])
+		full_path = ft_strdup(envv_path);
+	else if (envv_path && args[0][0] == '~')
+		full_path = ft_prepend_str(envv_path, &args[0][1]);
+	else if (!ft_strcmp(args[0], "-") && 
+			(envv_path = find_envv("OLDPWD", 1)))
+		full_path = ft_strdup(envv_path);
 	else
-	{
-		if (home_path && args[0][0] == '~')
-		{
-			full_path = ft_prepend_str(home_path, &args[0][1]);
-			if (chdir(full_path))
-				determine_chdir_error(full_path);
-			free(full_path);
-		}
-		else if (chdir(args[0]))
-			determine_chdir_error(args[0]);
-	}
+		full_path = ft_strdup(args[0]);
+	if (chdir(full_path))
+		determine_chdir_error(full_path);
+	else
+		update_oldpwd(cwd);
+	free(full_path);
+	free(cwd);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:23:29 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 15:19:35 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 18:27:55 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		unset_env(char **args)
 	while (args[++i])
 	{
 		key = get_envv_key(args[i]);
-		var_pos = find_envv(key);
+		var_pos = get_envv_index(key);
 		if (~var_pos)
 			remove_envv(var_pos);
 		else

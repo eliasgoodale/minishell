@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 11:28:00 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 13:09:20 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 17:52:31 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		echo(char **args)
 {
 	VAR(int, i, -1);
 	VAR(int, n_flag, 0);
-	VAR(int, envvindex, -1);
 	if (!args[0])
 		return (write(1, "\n", 1));
 	if (ft_strcmp("-n", args[0]) == 0)
@@ -25,16 +24,7 @@ int		echo(char **args)
 		i++;
 	}
 	while (args[++i])
-	{
-		if (args[i][0] == '$')
-		{
-			envvindex = find_envv(&args[i][1]);
-			ft_printf("%s", ~envvindex ? get_envv_val(g_envv[envvindex]) : "");
-		}
-		else
-			ft_printf("%s", args[i]);
-		ft_printf("%s", args[i + 1] ? " " : "");
-	}
+		ft_printf("%s%s", args[i], args[i + 1] ? " " : "");
 	n_flag ? 0 : write(1, "\n", 1);
 	return (1);
 }

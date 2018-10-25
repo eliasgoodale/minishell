@@ -6,7 +6,7 @@
 /*   By: egoodale <egoodale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 15:29:03 by egoodale          #+#    #+#             */
-/*   Updated: 2018/10/23 15:56:01 by egoodale         ###   ########.fr       */
+/*   Updated: 2018/10/24 18:28:03 by egoodale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_variable(char *key, char *val)
 {
-	VAR(int, pos, find_envv(key));
+	VAR(int, pos, get_envv_index(key));
 	VAR(char *, new_val, ft_strjoin("=", val));
 	if (~pos)
 	{
