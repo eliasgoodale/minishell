@@ -38,3 +38,13 @@ void	handle_signal(int sig)
 		signal(SIGINT, handle_signal);
 	}
 }
+
+int		matches_path(char *path_to_match, char *path)
+{
+	VAR(char *, executable, find_last_any(path, "/"));
+	VAR(size_t, match_len, ft_strlen(path_to_match));
+	VAR(size_t, num_chars_to_compare, executable - path);
+	if (match_len == num_chars_to_compare && ft_strncmp(path_to_match, path, match_len) == 0)
+		return (1);
+	return (0);
+}

@@ -25,7 +25,6 @@ LIBFT_A = libft/libft.a
 
 all: $(NAME)
 
-
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_A)
 	gcc $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT_A)
 $(OBJ): %.o: $(SRC_DIR)%.c

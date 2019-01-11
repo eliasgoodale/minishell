@@ -70,6 +70,7 @@ void	translate_envv_args(char **args);
 
 int		is_in(char *directory_name, char *executable);
 void	handle_signal(int sig);
+int     matches_path(char *path_to_match, char *path);
 
 /*
 ** Environment Helpers

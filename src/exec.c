@@ -59,7 +59,11 @@ int		build_path(char **args)
 	{
 		while (search_directory)
 		{
-			if (is_in(search_directory, args[0]))
+			if (matches_path(search_directory, args[0])) {
+				full_path = ft_strdup(args[0]);
+				break;
+			}
+			else if (is_in(search_directory, args[0]))
 			{
 				full_path = ft_join(search_directory, "/", args[0]);
 				break ;
