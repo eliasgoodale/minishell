@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-int		ft_uintlen(uintmax_t n)
+int		ft_uintlen(u_int64_t n)
 {
 	int len;
 

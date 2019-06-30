@@ -12,10 +12,10 @@
 
 #include "../include/libft.h"
 
-char	*ft_imaxtoa(intmax_t value)
+char	*ft_imaxtoa(int64_t value)
 {
-	uintmax_t	i;
-	intmax_t	size;
+	u_int64_t	i;
+	int64_t	size;
 	char		*ret;
 
 	i = (value < 0) ? -value : value;

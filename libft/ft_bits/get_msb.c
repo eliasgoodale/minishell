@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-uintmax_t	get_msb(uintmax_t nb)
+u_int64_t	get_msb(u_int64_t nb)
 {
 	VAR(unsigned, msb, 0);
 	if (nb == 0)

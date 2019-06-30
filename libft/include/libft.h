@@ -53,10 +53,10 @@ typedef struct		s_vector
 ** Bitwise Handlers
 */
 
-uintmax_t			ft_bitinsert(uintmax_t nb, uintmax_t ins,
+u_int64_t			ft_bitinsert(u_int64_t nb, u_int64_t ins,
 					unsigned lb, unsigned ub);
-void				ft_printbits(uintmax_t nb);
-uintmax_t			get_msb(uintmax_t nb);
+void				ft_printbits(u_int64_t nb);
+u_int64_t			get_msb(u_int64_t nb);
 
 /*
 ** Math Functions
@@ -83,18 +83,18 @@ void				ft_charswap(char *a, char *b);
 ** Conversions
 */
 
-char				*ft_imaxtoa(intmax_t value);
+char				*ft_imaxtoa(int64_t value);
 char				*ft_itoa(int n);
-char				*ft_uimaxtoa_base(uintmax_t value, int8_t base,
+char				*ft_uimaxtoa_base(u_int64_t value, int8_t base,
 					const char *str);
 int					ft_atoi(const char *str);
 /*
 ** Integer
 */
 
-int					ft_intlen(intmax_t n);
+int					ft_intlen(int64_t n);
 int					ft_max(int *tab, size_t len);
-int					ft_uintlen(uintmax_t n);
+int					ft_uintlen(u_int64_t n);
 
 /*
 ** Linked List
@@ -131,9 +131,9 @@ void				ft_bzero(void *s, size_t n);
 
 void				ft_putstr(char const *str);
 void				ft_putstr_fd(char const *str, int fd);
-void				ft_putnbr(intmax_t nb);
+void				ft_putnbr(int64_t nb);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putnbr_unsigned(uintmax_t nb);
+void				ft_putnbr_unsigned(u_int64_t nb);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putchar(int c);

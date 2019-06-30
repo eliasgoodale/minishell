@@ -12,9 +12,9 @@
 
 #include "../include/libft.h"
 
-void		ft_printbits(uintmax_t nb)
+void		ft_printbits(u_int64_t nb)
 {
-	VAR(uintmax_t, i, (1ULL << 63));
+	VAR(u_int64_t, i, (1ULL << 63));
 	VAR(unsigned, pos, get_msb(nb));
 	VAR(unsigned, is_first, 1);
 	if (nb == 0)

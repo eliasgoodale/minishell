@@ -17,7 +17,7 @@
 #define IS_U(c) ((c | 32) == 'u')
 #define ISXO(c) ((IS_X(c)) || (IS_O(c)))
 
-uintmax_t	get_len_unsigned(char length, va_list ap)
+u_int64_t	get_len_unsigned(char length, va_list ap)
 {
 	if (length == hh)
 		return ((unsigned char)va_arg(ap, int));
@@ -28,7 +28,7 @@ uintmax_t	get_len_unsigned(char length, va_list ap)
 	if (length == ll)
 		return (va_arg(ap, unsigned long long));
 	if (length == j)
-		return (va_arg(ap, uintmax_t));
+		return (va_arg(ap, u_int64_t));
 	if (length == z)
 		return (va_arg(ap, size_t));
 	return (va_arg(ap, unsigned int));

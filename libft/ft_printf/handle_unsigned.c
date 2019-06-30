@@ -14,7 +14,7 @@
 
 void	handle_hexadec(t_vector *vector, t_arg *inf, va_list ap)
 {
-	uintmax_t	hex;
+	u_int64_t	hex;
 	char		*s;
 
 	if (inf->spec == 'p')
@@ -30,7 +30,7 @@ void	handle_hexadec(t_vector *vector, t_arg *inf, va_list ap)
 
 void	handle_unsigned(t_vector *vector, t_arg *inf, va_list ap)
 {
-	uintmax_t	uns;
+	u_int64_t	uns;
 	char		*s;
 
 	if (inf->spec == 'U')
@@ -44,7 +44,7 @@ void	handle_unsigned(t_vector *vector, t_arg *inf, va_list ap)
 
 void	handle_octal(t_vector *vector, t_arg *inf, va_list ap)
 {
-	uintmax_t	oct;
+	u_int64_t	oct;
 	char		*s;
 
 	if (inf->spec == 'O')
@@ -58,7 +58,7 @@ void	handle_octal(t_vector *vector, t_arg *inf, va_list ap)
 
 void	handle_bin(t_vector *vector, t_arg *inf, va_list ap)
 {
-	uintmax_t	bin;
+	u_int64_t	bin;
 	char		*s;
 
 	bin = va_arg(ap, unsigned long long);

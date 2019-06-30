@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-void	ft_putnbr(intmax_t nb)
+void	ft_putnbr(int64_t nb)
 {
 	if (nb == LLONG_MIN)
 		ft_putstr("-9223372036854775807");

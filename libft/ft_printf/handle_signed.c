@@ -12,7 +12,7 @@
 
 #include "../include/ft_printf.h"
 
-intmax_t	get_len_signed(char length, va_list ap)
+int64_t	get_len_signed(char length, va_list ap)
 {
 	if (length == hh)
 		return ((signed char)va_arg(ap, int));
@@ -23,7 +23,7 @@ intmax_t	get_len_signed(char length, va_list ap)
 	if (length == ll)
 		return (va_arg(ap, long long));
 	if (length == j)
-		return (va_arg(ap, intmax_t));
+		return (va_arg(ap, int64_t));
 	if (length == z)
 		return (va_arg(ap, ssize_t));
 	return (va_arg(ap, int));
@@ -31,7 +31,7 @@ intmax_t	get_len_signed(char length, va_list ap)
 
 void		handle_integer(t_vector *vector, t_arg *inf, va_list ap)
 {
-	intmax_t	nb;
+	int64_t	nb;
 	char		*s;
 
 	inf->length = inf->spec == 'D' ? l : inf->length;

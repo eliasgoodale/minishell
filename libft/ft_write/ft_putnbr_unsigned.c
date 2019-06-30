@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-void	ft_putnbr_unsigned(uintmax_t nb)
+void	ft_putnbr_unsigned(u_int64_t nb)
 {
 	if (nb == ULLONG_MAX)
 		ft_putstr("18446744073709551616");

@@ -12,9 +12,9 @@
 
 #include "../include/libft.h"
 
-char	*ft_uimaxtoa_base(uintmax_t value, int8_t base, const char *str)
+char	*ft_uimaxtoa_base(u_int64_t value, int8_t base, const char *str)
 {
-	uintmax_t	i;
+	u_int64_t	i;
 	size_t		size;
 	char		*ret;
 

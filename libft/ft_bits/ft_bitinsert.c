@@ -12,14 +12,14 @@
 
 #include "../include/libft.h"
 
-uintmax_t		ft_bitinsert(uintmax_t nb, uintmax_t ins,
+u_int64_t		ft_bitinsert(u_int64_t nb, u_int64_t ins,
 								unsigned lb, unsigned ub)
 {
-	VAR(uintmax_t, all_ones, ~0);
-	VAR(uintmax_t, left, all_ones << (ub + 1));
-	VAR(uintmax_t, right, ((1 << lb) - 1));
-	VAR(uintmax_t, mask, (left | right));
-	VAR(uintmax_t, nb_cleared, nb & mask);
-	VAR(uintmax_t, m_shifted, ins << lb);
+	VAR(u_int64_t, all_ones, ~0);
+	VAR(u_int64_t, left, all_ones << (ub + 1));
+	VAR(u_int64_t, right, ((1 << lb) - 1));
+	VAR(u_int64_t, mask, (left | right));
+	VAR(u_int64_t, nb_cleared, nb & mask);
+	VAR(u_int64_t, m_shifted, ins << lb);
 	return (nb_cleared | m_shifted);
 }

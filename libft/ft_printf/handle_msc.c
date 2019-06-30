@@ -13,31 +13,31 @@
 #include "../include/ft_printf.h"
 #include "../include/pf_colors.h"
 
-intmax_t	*ft_printf_n_len(t_arg *inf, va_list ap)
+int64_t	*ft_printf_n_len(t_arg *inf, va_list ap)
 {
 	if (inf->length == hh)
-		return ((intmax_t *)va_arg(ap, signed char *));
+		return ((int64_t *)va_arg(ap, signed char *));
 	if (inf->length == h)
-		return ((intmax_t *)va_arg(ap, short *));
+		return ((int64_t *)va_arg(ap, short *));
 	if (inf->length == l)
-		return ((intmax_t *)va_arg(ap, long *));
+		return ((int64_t *)va_arg(ap, long *));
 	if (inf->length == ll)
-		return ((intmax_t *)va_arg(ap, long long *));
+		return ((int64_t *)va_arg(ap, long long *));
 	if (inf->length == j)
-		return ((intmax_t *)va_arg(ap, intmax_t *));
+		return ((int64_t *)va_arg(ap, int64_t *));
 	if (inf->length == z)
-		return ((intmax_t *)va_arg(ap, ssize_t *));
-	return ((intmax_t *)va_arg(ap, int *));
+		return ((int64_t *)va_arg(ap, ssize_t *));
+	return ((int64_t *)va_arg(ap, int *));
 }
 
 void		handle_pos(t_vector *vector, t_arg *inf, va_list ap)
 {
-	intmax_t	*i;
+	int64_t	*i;
 	int			tmp;
 
 	tmp = vector->len;
 	i = ft_printf_n_len(inf, ap);
-	*i = (intmax_t)tmp;
+	*i = (int64_t)tmp;
 }
 
 void		handle_percent(t_vector *vector, t_arg *inf, va_list ap)
